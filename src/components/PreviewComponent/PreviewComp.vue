@@ -2,18 +2,25 @@
   <div class="main-block">
     <div class="user-block main">
       <p>Персональные данные</p>
-      <div>
+      <div v-if="!userDataStore.first_name">
+        <span>Добавьте данные на странице "Форма"</span>
+      </div>
+      <div v-else>
         <span class="data-text">{{ userDataStore.last_name }}, </span>
         <span class="data-text">{{ userDataStore.first_name }}, </span>
         <span class="data-text">{{ userDataStore.patronymic }}, </span>
-        <span class="data-text data-age">{{ userDataStore.age }} лет </span>
+        <span class="data-text data-age" v-show="userDataStore.first_name"
+          >{{ userDataStore.age }} лет
+        </span>
       </div>
     </div>
     <div class="user-block main">
       <p>Дети</p>
       <div class="child" v-for="it in userChildStore" :key="it.id">
         <span class="data-text">{{ it.name }}, </span>
-        <span class="data-text data-age">{{ it.age }} лет</span>
+        <span class="data-text data-age" v-show="it.name"
+          >{{ it.age }} лет</span
+        >
       </div>
     </div>
   </div>
@@ -25,11 +32,6 @@ import { mapGetters } from "vuex";
 export default {
   props: {
     msg: String,
-  },
-  data: function () {
-    return {
-      name: "Home",
-    };
   },
   methods: {},
   computed: {

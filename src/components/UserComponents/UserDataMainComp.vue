@@ -99,9 +99,15 @@ export default {
     ...mapGetters("mainstore", { userDataStore: "userDataStore" }),
 
     styleForBtn() {
-      return this.userChild.length === 5
-        ? { pointerEvents: "none", opacity: "0.4" }
-        : { pointerEvents: "auto", opacity: "1" };
+      if (this.userChildStore.length > 0) {
+        return this.userChildStore.length === 5
+          ? { pointerEvents: "none", opacity: "0.4" }
+          : { pointerEvents: "auto", opacity: "1" };
+      } else {
+        return this.userChild.length === 5
+          ? { pointerEvents: "none", opacity: "0.4" }
+          : { pointerEvents: "auto", opacity: "1" };
+      }
     },
     styleBtnSave() {
       let arr = Object.values(this.user);
